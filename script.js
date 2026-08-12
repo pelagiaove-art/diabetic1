@@ -1,3 +1,5 @@
+alert('JavaScript работает!');
+
 // ===== ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ =====
 document.querySelectorAll('.nav-btn').forEach(function (btn) {
   btn.addEventListener('click', function () {
