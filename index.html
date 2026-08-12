@@ -34,7 +34,29 @@
     <!-- 🍎 ЭКРАН 2: ЕДА -->
     <section id="screen-food" class="screen">
       <h1>🍎 Еда</h1>
-      <div class="card"><p class="empty">База продуктов — следующий шаг</p></div>
+      <div class="card">
+        <input type="text" id="foodSearch" placeholder="🔍 Найти продукт...">
+        <div id="foodList"></div>
+      </div>
+
+      <div class="card" id="foodCalc" style="display:none">
+        <h2 id="calcName"></h2>
+        <label>Вес (г)</label>
+        <input type="number" id="foodWeight" placeholder="100">
+        <div id="pieceRow" style="display:none">
+          <label>Или штуки</label>
+          <input type="number" id="foodPieces" step="0.5" placeholder="1">
+        </div>
+        <div class="xe-result">🍞 <b id="xeResult">0</b> ХЕ · углеводы ≈ <span id="carbsResult">0</span> г</div>
+        <button id="addMealBtn">🍽️ Добавить в еду</button>
+      </div>
+
+      <div class="card">
+        <h2>🍽️ Моя еда</h2>
+        <div id="mealList"><p class="empty">Выберите продукты выше</p></div>
+        <div class="meal-total">Итого: <b id="mealXe">0</b> ХЕ</div>
+        <button id="toMeasureBtn">➡️ Перенести в замер</button>
+      </div>
     </section>
 
     <!-- ➕ ЭКРАН 3: НОВЫЙ ЗАМЕР -->
