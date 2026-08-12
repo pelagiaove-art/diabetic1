@@ -1,19 +1,14 @@
-alert('JavaScript работает!');
-
 // ===== ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ =====
 document.querySelectorAll('.nav-btn').forEach(function (btn) {
   btn.addEventListener('click', function () {
     const screenId = this.getAttribute('data-screen');
-    
-    // Скрываем все экраны
+
     document.querySelectorAll('.screen').forEach(function (s) {
       s.classList.remove('active');
     });
-    
-    // Показываем нужный
+
     document.getElementById('screen-' + screenId).classList.add('active');
-    
-    // Обновляем активную кнопку
+
     document.querySelectorAll('.nav-btn').forEach(function (b) {
       b.classList.remove('active');
     });
@@ -61,7 +56,6 @@ saveBtn.addEventListener('click', function () {
   log.unshift(record);
   saveLog(log);
 
-  // Очищаем форму
   ['sugar', 'xe', 'bolus', 'basal', 'correction', 'note'].forEach(function (id) {
     document.getElementById(id).value = '';
   });
@@ -69,7 +63,6 @@ saveBtn.addEventListener('click', function () {
     box.checked = false;
   });
 
-  // Переходим на главную
   document.querySelector('.nav-btn[data-screen="home"]').click();
   renderHistory();
   renderDashboard();
@@ -112,19 +105,19 @@ function renderHistory() {
 // ===== ДАШБОРД (Главная) =====
 function renderDashboard() {
   const log = getLog();
-  
+
   if (log.length > 0) {
     const last = log[0];
-    document.getElementById('lastSugar').textContent = last.sugar + ' ммоль/л';
+    const sugarEl = document.getElementById('lastSugar');
+    sugarEl.textContent = last.sugar + ' ммоль/л';
     document.getElementById('lastTime').textContent = last.time;
-    
+
     let colorClass = 'normal';
     if (last.sugar < 3.9) colorClass = 'low';
     if (last.sugar > 10) colorClass = 'high';
-    document.getElementById('lastSugar').className = 'big-sugar ' + colorClass;
+    sugarEl.className = 'big-sugar ' + colorClass;
   }
 
-  // Статистика за сегодня
   const today = new Date().toDateString();
   const todayLog = log.filter(function (r) {
     return new Date(r.time).toDateString() === today;
