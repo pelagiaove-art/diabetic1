@@ -3,46 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0066cc">
   <title>Мой Дневник Диабета</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🩸 Мой Дневник Диабета</h1>
+  <main>
+    <!-- 🏠 ЭКРАН 1: ГЛАВНАЯ -->
+    <section id="screen-home" class="screen active">
+      <h1>🩸 Мой Дневник Диабета</h1>
+      <div class="card">
+        <div class="big-sugar normal" id="lastSugar">—</div>
+        <div class="meta center" id="lastTime">Нет замеров</div>
+      </div>
+      <div class="card">
+        <h2>Сегодня</h2>
+        <div class="today">
+          <div>Замеров<br><b id="statCount">0</b></div>
+          <div>Средний<br><b id="statAvg">—</b></div>
+          <div>ХЕ<br><b id="statXe">0</b></div>
+          <div>Инсулин<br><b id="statIns">0</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Последние записи</h2>
+        <div id="history"><p class="empty">Здесь появятся ваши записи 🌱</p></div>
+      </div>
+    </section>
 
-  <div class="card">
-    <h2>Новый замер</h2>
+    <!-- 🍎 ЭКРАН 2: ЕДА -->
+    <section id="screen-food" class="screen">
+      <h1>🍎 Еда</h1>
+      <div class="card"><p class="empty">База продуктов — следующий шаг</p></div>
+    </section>
 
-    <label for="sugar">Сахар (ммоль/л)</label>
-    <input type="number" id="sugar" step="0.1" placeholder="5.5">
+    <!-- ➕ ЭКРАН 3: НОВЫЙ ЗАМЕР -->
+    <section id="screen-add" class="screen">
+      <h1>➕ Новый замер</h1>
+      <div class="card">
+        <label for="sugar">Сахар (ммоль/л)</label>
+        <input type="number" id="sugar" step="0.1" placeholder="5.5">
 
-    <label for="xe">Еда (ХЕ)</label>
-    <input type="number" id="xe" step="0.5" placeholder="2.5">
+        <label for="xe">Еда (ХЕ)</label>
+        <input type="number" id="xe" step="0.5" placeholder="2.5">
 
-    <label>Инсулин (ед)</label>
-    <div class="insulin-row">
-      <input type="number" id="bolus" step="0.5" placeholder="Болюс">
-      <input type="number" id="basal" step="0.5" placeholder="База">
-      <input type="number" id="correction" step="0.5" placeholder="Подколка">
-    </div>
+        <label>Инсулин (ед)</label>
+        <div class="insulin-row">
+          <input type="number" id="bolus" step="0.5" placeholder="Болюс">
+          <input type="number" id="basal" step="0.5" placeholder="База">
+          <input type="number" id="correction" step="0.5" placeholder="Подколка">
+        </div>
 
-    <label>Состояние</label>
-    <div class="tags">
-      <label class="tag"><input type="checkbox" value="стресс"> стресс</label>
-      <label class="tag"><input type="checkbox" value="болезнь"> болезнь</label>
-      <label class="tag"><input type="checkbox" value="нагрузка"> нагрузка</label>
-      <label class="tag"><input type="checkbox" value="плохо спала"> плохо спала</label>
-    </div>
+        <label>Состояние</label>
+        <div class="tags">
+          <label class="tag"><input type="checkbox" value="стресс"> стресс</label>
+          <label class="tag"><input type="checkbox" value="болезнь"> болезнь</label>
+          <label class="tag"><input type="checkbox" value="нагрузка"> нагрузка</label>
+          <label class="tag"><input type="checkbox" value="плохо спала"> плохо спала</label>
+        </div>
 
-    <label for="note">Заметка</label>
-    <input type="text" id="note" placeholder="Например: ела в гостях">
+        <label for="note">Заметка</label>
+        <input type="text" id="note" placeholder="Например: ела в гостях">
 
-    <button id="saveBtn">💾 Сохранить замер</button>
-  </div>
+        <button id="saveBtn">💾 Сохранить замер</button>
+      </div>
+    </section>
 
-  <div class="card">
-    <h2>История</h2>
-    <div id="history"><p class="empty">Пока пусто</p></div>
-  </div>
+    <!-- 📊 ЭКРАН 4: СТАТИСТИКА -->
+    <section id="screen-stats" class="screen">
+      <h1>📊 Статистика</h1>
+      <div class="card"><p class="empty">Графики — скоро</p></div>
+    </section>
+
+    <!-- ⚙️ ЭКРАН 5: НАСТРОЙКИ -->
+    <section id="screen-settings" class="screen">
+      <h1>⚙️ Настройки</h1>
+      <div class="card"><p class="empty">Коэффициенты и темы — скоро</p></div>
+    </section>
+  </main>
+
+  <!-- НИЖНЯЯ НАВИГАЦИЯ (переключает экраны) -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-screen="home">🏠<span>Главная</span></button>
+    <button class="nav-btn" data-screen="food">🍎<span>Еда</span></button>
+    <button class="nav-btn plus" data-screen="add">＋</button>
+    <button class="nav-btn" data-screen="stats">📊<span>Статистика</span></button>
+    <button class="nav-btn" data-screen="settings">⚙️<span>Настройки</span></button>
+  </nav>
 
   <script src="script.js"></script>
 </body>
