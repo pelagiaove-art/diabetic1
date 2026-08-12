@@ -97,3 +97,24 @@ button:active { background: #004c99; }
   margin-top: -30px;
   box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
 }
+/* ЕДА */
+.food-item {
+  width: 100%; background: #f6f7fb; color: #1d1d1f;
+  text-align: left; padding: 12px; border-radius: 12px;
+  margin-bottom: 6px; font-size: 15px; font-weight: normal;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.gi { font-size: 12px; padding: 3px 8px; border-radius: 10px; }
+.gi-low { background: #e6f7e9; color: #2e9e44; }
+.gi-mid { background: #fff4e0; color: #d18a1f; }
+.gi-high { background: #ffe9e7; color: #d64541; }
+.xe-result { font-size: 18px; text-align: center; margin: 10px 0; }
+.meal-total { text-align: right; margin: 10px 0; }
+.meal-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px;
+}
+.del-btn {
+  width: auto; padding: 4px 8px; background: #ffe9e7;
+  color: #d64541; font-size: 12px; border-radius: 8px; margin-left: 8px;
+}
