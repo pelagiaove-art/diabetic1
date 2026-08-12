@@ -1,4 +1,25 @@
-// ===== ПАМЯТЬ ПРИЛОЖЕНИЯ (localStorage) =====
+// ===== ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ =====
+document.querySelectorAll('.nav-btn').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    const screenId = this.getAttribute('data-screen');
+    
+    // Скрываем все экраны
+    document.querySelectorAll('.screen').forEach(function (s) {
+      s.classList.remove('active');
+    });
+    
+    // Показываем нужный
+    document.getElementById('screen-' + screenId).classList.add('active');
+    
+    // Обновляем активную кнопку
+    document.querySelectorAll('.nav-btn').forEach(function (b) {
+      b.classList.remove('active');
+    });
+    this.classList.add('active');
+  });
+});
+
+// ===== ПАМЯТЬ (localStorage) =====
 function getLog() {
   return JSON.parse(localStorage.getItem('diaryLog') || '[]');
 }
@@ -18,7 +39,6 @@ saveBtn.addEventListener('click', function () {
     return;
   }
 
-  // Собираем отмеченные теги состояния
   const tags = [];
   document.querySelectorAll('.tag input:checked').forEach(function (box) {
     tags.push(box.value);
@@ -36,7 +56,7 @@ saveBtn.addEventListener('click', function () {
   };
 
   const log = getLog();
-  log.unshift(record); // новая запись — сверху
+  log.unshift(record);
   saveLog(log);
 
   // Очищаем форму
@@ -47,7 +67,10 @@ saveBtn.addEventListener('click', function () {
     box.checked = false;
   });
 
+  // Переходим на главную
+  document.querySelector('.nav-btn[data-screen="home"]').click();
   renderHistory();
+  renderDashboard();
 });
 
 // ===== ИСТОРИЯ =====
@@ -56,17 +79,15 @@ function renderHistory() {
   const box = document.getElementById('history');
 
   if (log.length === 0) {
-    box.innerHTML = '<p class="empty">Пока пусто</p>';
+    box.innerHTML = '<p class="empty">Здесь появятся ваши записи 🌱</p>';
     return;
   }
 
-  box.innerHTML = log.map(function (r) {
-    // Цвет сахара: гипо / норма / гипер
+  box.innerHTML = log.slice(0, 5).map(function (r) {
     let color = 'normal';
     if (r.sugar < 3.9) color = 'low';
     if (r.sugar > 10) color = 'high';
 
-    // Инсулин: показываем только то, что вводили
     const ins = [];
     if (r.bolus) ins.push('болюс ' + r.bolus);
     if (r.basal) ins.push('база ' + r.basal);
@@ -86,5 +107,45 @@ function renderHistory() {
   }).join('');
 }
 
-// Показываем историю при запуске приложения
+// ===== ДАШБОРД (Главная) =====
+function renderDashboard() {
+  const log = getLog();
+  
+  if (log.length > 0) {
+    const last = log[0];
+    document.getElementById('lastSugar').textContent = last.sugar + ' ммоль/л';
+    document.getElementById('lastTime').textContent = last.time;
+    
+    let colorClass = 'normal';
+    if (last.sugar < 3.9) colorClass = 'low';
+    if (last.sugar > 10) colorClass = 'high';
+    document.getElementById('lastSugar').className = 'big-sugar ' + colorClass;
+  }
+
+  // Статистика за сегодня
+  const today = new Date().toDateString();
+  const todayLog = log.filter(function (r) {
+    return new Date(r.time).toDateString() === today;
+  });
+
+  document.getElementById('statCount').textContent = todayLog.length;
+
+  if (todayLog.length > 0) {
+    const avg = todayLog.reduce(function (sum, r) { return sum + r.sugar; }, 0) / todayLog.length;
+    document.getElementById('statAvg').textContent = avg.toFixed(1);
+  } else {
+    document.getElementById('statAvg').textContent = '—';
+  }
+
+  const totalXe = todayLog.reduce(function (sum, r) { return sum + r.xe; }, 0);
+  document.getElementById('statXe').textContent = totalXe.toFixed(1);
+
+  const totalIns = todayLog.reduce(function (sum, r) {
+    return sum + (r.bolus || 0) + (r.basal || 0) + (r.correction || 0);
+  }, 0);
+  document.getElementById('statIns').textContent = totalIns.toFixed(1);
+}
+
+// Запуск при загрузке
 renderHistory();
+renderDashboard();
