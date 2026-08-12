@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мой Дневник Диабета</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🩸 Мой Дневник Диабета</h1>
 
+  <div class="card">
+    <h2>Новый замер</h2>
+
+    <label for="sugar">Сахар (ммоль/л)</label>
+    <input type="number" id="sugar" step="0.1" placeholder="5.5">
+
+    <label for="xe">Еда (ХЕ)</label>
+    <input type="number" id="xe" step="0.5" placeholder="2.5">
+
+    <label>Инсулин (ед)</label>
+    <div class="insulin-row">
+      <input type="number" id="bolus" step="0.5" placeholder="Болюс">
+      <input type="number" id="basal" step="0.5" placeholder="База">
+      <input type="number" id="correction" step="0.5" placeholder="Подколка">
+    </div>
+
+    <label>Состояние</label>
+    <div class="tags">
+      <label class="tag"><input type="checkbox" value="стресс"> стресс</label>
+      <label class="tag"><input type="checkbox" value="болезнь"> болезнь</label>
+      <label class="tag"><input type="checkbox" value="нагрузка"> нагрузка</label>
+      <label class="tag"><input type="checkbox" value="плохо спала"> плохо спала</label>
+    </div>
+
+    <label for="note">Заметка</label>
+    <input type="text" id="note" placeholder="Например: ела в гостях">
+
+    <button id="saveBtn">💾 Сохранить замер</button>
+  </div>
+
+  <div class="card">
+    <h2>История</h2>
+    <div id="history"><p class="empty">Пока пусто</p></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
