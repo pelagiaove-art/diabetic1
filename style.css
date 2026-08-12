@@ -1,1 +1,95 @@
+body {
+  font-family: sans-serif;
+  background: #f5f5f7;
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
 
+h1 { color: #0066cc; text-align: center; font-size: 22px; }
+h2 { font-size: 17px; margin-bottom: 12px; }
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.insulin-row { display: flex; gap: 8px; }
+.insulin-row input { margin-bottom: 8px; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #eef4ff;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-weight: normal;
+  font-size: 14px;
+  margin: 0;
+}
+
+.tag input { width: auto; margin: 0; }
+
+button {
+  width: 100%;
+  padding: 15px;
+  background: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:active { background: #004c99; }
+
+.empty { text-align: center; color: #999; padding: 16px; }
+
+.history-item {
+  padding: 12px 4px;
+  border-bottom: 1px solid #eee;
+}
+.history-item:last-child { border-bottom: none; }
+
+.sugar-big {
+  font-size: 22px;
+  font-weight: 700;
+}
+.low { color: #ff3b30; }
+.normal { color: #34c759; }
+.high { color: #ff9500; }
+
+.meta {
+  font-size: 13px;
+  color: #666;
+  margin-top: 2px;
+}
